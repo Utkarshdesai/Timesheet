@@ -1,15 +1,20 @@
 import { fetchUserdata } from "./Fetchuserdata";
 
 export const login = async (email , password) => {
+
+    console.log(email , password )
  
     const useremail = email.toLowerCase().trim();
-    const userdata = await fetchUserdata()
-    const {Email , Password} = userdata
-  
-    try {
-    //match email and password 
+    const userdata  = await fetchUserdata()
 
-    if(useremail != Email || password!= Password)
+   //Access the first user object from the array
+        const user = userdata[0]; 
+        console.log('User data:', user.Email, user.Password);
+  
+     
+   try {
+    //match email and password 
+    if(useremail !==  user.Email || password !== user.Password)
    {   
         return {
         status: 401,
@@ -18,19 +23,19 @@ export const login = async (email , password) => {
     }
 
     //create seesion token 
-    const token = `token_${Date.now()}_${Email}`;
+    const token = `token_${Date.now()}_${user.Email}`;
 
     //saved token in sessions
     sessionStorage.setItem('token' , token)
-    sessionStorage.setItem('email' , Email)
-    sessionStorage.setItem('password', Password)
+    sessionStorage.setItem('email' , user.Email)
+    sessionStorage.setItem('password', user.Password)
 
     console.log(sessionStorage)
 
     //send response to frontend 
     const response = {
         'status' :200,
-        'message' : 'user is login sucessfully' ,
+        'message' :'user is login sucessfully' ,
          token 
     }
 

@@ -1,11 +1,15 @@
 import React, {  useState } from 'react'
 import { login } from '../api/login'
 import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router'
+
 
 const LoginCard = () => {
 
   const [email, setemail] = useState('')
   const [password , setpassword] = useState('')
+
+  const navigate = useNavigate()
 
 
   const handlesubmit = async (event) => {
@@ -23,14 +27,16 @@ const LoginCard = () => {
         // validations
         if(!formdata.email || !formdata.password )
          { 
-            return toast.error('fill all the required fields')
+             toast.error('fill all the required fields')
+             return 
             
          }
         
         // password validations min length 
         if(formdata.password.length < 6)
         {   
-            return toast.error('password length is missing')
+            toast.error('password length is missing')
+            return
            
         }
 
@@ -39,13 +45,24 @@ const LoginCard = () => {
         const sendata = await login(email , password)
         console.log(sendata)
 
+        if(sendata.status === 401)
+        {
+            toast.error('Invalid Email or Password')
+            console.log('Login successful!');
+        }
+
         if(sendata.status === 200)
         {   
             toast.success('Login sucessful')
             console.log('Login successful!');
             // Show success toast
             // Redirect to dashboard
+             navigate('/timesheet'); 
+             console.log('naviagate')
+            
         }
+        
+
         else{
             console.log('login failed')
         }
@@ -66,7 +83,7 @@ const LoginCard = () => {
         
         <form 
          onSubmit={handlesubmit}
-         className=''>
+        >
             
 
               <div className='flex-col space-y-2'>

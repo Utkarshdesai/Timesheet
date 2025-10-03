@@ -3,6 +3,7 @@ import './App.css'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import TimeSheet from './pages/TimeSheet'
+import PrivateRoute from './utils/privateRoute'
 function App() {
   
 
@@ -12,7 +13,14 @@ function App() {
      <div className='w-screen h-screen overflow-x-hidden'>
         <Routes>
           <Route path="/" element={<Home/>} />
-          <Route path='/timesheet' element={<TimeSheet/>} /> 
+         
+              <Route path='/timesheet' element={
+                <PrivateRoute>
+                  <TimeSheet/>
+                </PrivateRoute>
+               
+              } /> 
+      
           <Route path='*' element={<NotFound/>} />
         </Routes>
      </div>

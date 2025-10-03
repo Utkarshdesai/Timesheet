@@ -2,6 +2,8 @@ import React from 'react'
 import LoginCard from '../components/LoginCard'
 
 const Home = () => {
+
+    console.log(sessionStorage)
   return (
     <div className='flex flex-row '> 
         <div className='w-[50%] flex justify-center items-center'> 

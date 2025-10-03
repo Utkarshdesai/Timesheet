@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { ChevronDown } from 'lucide-react';
-import Footer from './Footer';
+import Footer from './common/Footer';
 import UserTimeshettTable from './UserTimeshettTable';
 
 
 const TimesheetTable = () => {
 
     const [timesheetdata , settimesheetdata] = useState([])
+    const [loading ,setloding] = useState(false)
 
- // fetch user data 
+ // fetch Timesheetdata
    const fetchTimesheet = async() => {
     try {
+     setloding(true)
      const data = await fetch('https://timesheet-backend-fz99.onrender.com/timesheetdata')
      const res = await data.json()
      console.log(res.data)
      settimesheetdata(res.data)
+     setloding(false)
     } catch (error) {
        console.log('error' ,error)
     }
@@ -24,15 +27,13 @@ const TimesheetTable = () => {
      fetchTimesheet()
   }, [])
  
-  //fetch timesheet data 
-  
-
 
 
   return (
    <div> 
+    
     <div className='mx-auto mt-[27px] w-[1280px] h-[648px] p-6 opacity-100
-      space-y-3
+     space-y-3
       shadow-[0px_1px_2px_-1px_rgba(0,0,0,0.1),0px_1px_3px_0px_rgba(0,0,0,0.1)]
      '>
         <p className='font-inter font-bold text-2xl leading-6 tracking-normal text-gray-900 gap-2'> Your Timesheets </p>
@@ -53,6 +54,7 @@ const TimesheetTable = () => {
 
         <UserTimeshettTable 
           timesheetdata = {timesheetdata}
+          loading = {loading}
         />
         
         <div className='flex justify-between '>
@@ -96,8 +98,6 @@ const TimesheetTable = () => {
             </div>
         </div>
         
-       
-      
       
     </div >
 
