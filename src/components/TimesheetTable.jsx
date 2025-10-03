@@ -1,9 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ChevronDown } from 'lucide-react';
 import Footer from './Footer';
 import UserTimeshettTable from './UserTimeshettTable';
 
+
 const TimesheetTable = () => {
+
+    const [timesheetdata , settimesheetdata] = useState([])
+
+ // fetch user data 
+   const fetchTimesheet = async() => {
+    try {
+     const data = await fetch('https://timesheet-backend-fz99.onrender.com/timesheetdata')
+     const res = await data.json()
+     console.log(res.data)
+     settimesheetdata(res.data)
+    } catch (error) {
+       console.log('error' ,error)
+    }
+ }
+ 
+  useEffect( () => {
+     fetchTimesheet()
+  }, [])
+ 
+  //fetch timesheet data 
+  
+
+
+
   return (
    <div> 
     <div className='mx-auto mt-[27px] w-[1280px] h-[648px] p-6 opacity-100
@@ -26,7 +51,9 @@ const TimesheetTable = () => {
             </div>
         </div>
 
-        <UserTimeshettTable/>
+        <UserTimeshettTable 
+          timesheetdata = {timesheetdata}
+        />
         
         <div className='flex justify-between '>
             <div className='flex w-[118px] h-[36px] gap-1.5 opacity-100 rounded-base justify-center items-center p-2 px-3 border border-gray-300 bg-gray-50 shadow-custom'>
@@ -72,8 +99,10 @@ const TimesheetTable = () => {
        
       
       
-    </div>
+    </div >
+
     <Footer/>
+
     </div>
   )
 }

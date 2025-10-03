@@ -1,40 +1,37 @@
-
-const email1 = 'abc@gmail.com'
-const password1 = 123456
+import { fetchUserdata } from "./Fetchuserdata";
 
 export const login = async (email , password) => {
-    //get formdata 
-    const Email = email.toLowerCase().trim();
-    //fetch data from endpoints -> todo
-    //try catch 
+ 
+    const useremail = email.toLowerCase().trim();
+    const userdata = await fetchUserdata()
+    const {Email , Password} = userdata
+  
     try {
-      
-    // check user is autheticated 
-
     //match email and password 
-    if(email1 != Email || password1!= password)
-   {   
-       
 
-       return {
+    if(useremail != Email || password!= Password)
+   {   
+        return {
         status: 401,
         message: 'Invalid email or password'
       };
     }
 
     //create seesion token 
-    sessionStorage.setItem('email' , 'e1234')
-    sessionStorage.setItem('password' , 11111)
+    const token = `token_${Date.now()}_${Email}`;
+
+    //saved token in sessions
+    sessionStorage.setItem('token' , token)
+    sessionStorage.setItem('email' , Email)
+    sessionStorage.setItem('password', Password)
 
     console.log(sessionStorage)
 
-    //save token 
-
     //send response to frontend 
-    const response ={
+    const response = {
         'status' :200,
         'message' : 'user is login sucessfully' ,
-        //send token 
+         token 
     }
 
     return response
@@ -46,7 +43,7 @@ export const login = async (email , password) => {
        const response = {
         'status' : 500,
         'message' : 'user login failed' ,
-        //send token 
+       
       }
       console.log(response)
       

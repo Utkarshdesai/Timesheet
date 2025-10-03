@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {  useState } from 'react'
 import { login } from '../api/login'
 import toast from 'react-hot-toast'
 
@@ -7,11 +7,9 @@ const LoginCard = () => {
   const [email, setemail] = useState('')
   const [password , setpassword] = useState('')
 
- 
 
   const handlesubmit = async (event) => {
-   
-     
+        
      event.preventDefault();
      const formdata = {
         'email' :email,
@@ -28,16 +26,16 @@ const LoginCard = () => {
             return toast.error('fill all the required fields')
             
          }
-        // email and password is not there 
+        
         // password validations min length 
-
         if(formdata.password.length < 6)
         {   
             return toast.error('password length is missing')
            
         }
-        // call login 
+
         const {email ,password} = formdata
+        // fetch email and password 
         const sendata = await login(email , password)
         console.log(sendata)
 

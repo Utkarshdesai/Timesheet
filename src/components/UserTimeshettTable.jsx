@@ -2,13 +2,9 @@ import React from 'react'
 import { Hash } from 'lucide-react';
 import { MoveDown } from 'lucide-react';
 // Example data structure
-const data = [
-  { id: 1, name: "1 - 5 January, 2024", email: "completed", status: "Actfyfive" },
-  { id: 2, name: "Jane Smith", email: "jane@example.com", status: "Inactive" },
-  // ... more rows from API
-];
 
-const UserTimeshettTable = () => {
+
+const UserTimeshettTable = ({timesheetdata}) => {
   return (
     <div>
        <table className="w-full">
@@ -68,24 +64,25 @@ const UserTimeshettTable = () => {
       </tr>
     </thead>
     <tbody>
-      {data.map((item) => (
+     
+      {timesheetdata.map((item) => (
         <tr key={item.id} className="border-b border-gray-200  h-[54px]">
           <td className="p-4">
-            <p className='font-inter font-normal text-sm leading-[150%] tracking-normal text-gray-900'> {item.id}</p>
+            <p className='font-inter font-normal text-sm leading-[150%] tracking-normal text-gray-900'> {item.week}</p>
           </td>
           <td className="p-4">
-            <p className='font-inter font-normal text-sm leading-[150%] tracking-normal text-gray-500'>  {item.name} </p>
+            <p className='font-inter font-normal text-sm leading-[150%] tracking-normal text-gray-500'>  {item.Date} </p>
             
           </td>
           <td className="p-4  ">
             <div className='w-[95px] h-[22px] bg-green-100 rounded-md flex items-center justify-center'>
               
-                   <p className='inline-block w-[75px] h-[18px] font-inter font-medium text-xs leading-[150%] tracking-normal text-center  text-green-800'>  {item.email}</p>
+                   <p className='inline-block w-[75px] h-[18px] font-inter font-medium text-xs leading-[150%] tracking-normal text-center  text-green-800'>  {item.status}</p>
            </div>
            
           </td>
           <td className="p-4">
-            <p className='font-inter font-normal text-base leading-[125%] tracking-normal text-[#1C64F2]'>     {item.status} </p>
+            <p className='font-inter font-normal text-base leading-[125%] tracking-normal text-[#1C64F2]'> {item.action} </p>
             
           </td>
         </tr>
