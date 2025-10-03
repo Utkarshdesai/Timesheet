@@ -1,6 +1,6 @@
 export const fetchUserdata= async() => {
    try {
-    const data = await fetch('http://localhost:4000/userdata')
+    const data = await fetch('https://timesheet-backend-fz99.onrender.com/userdata')
     const res = await data.json()
     console.log(res.data)
     return res.data
