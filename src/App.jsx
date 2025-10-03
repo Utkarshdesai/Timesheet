@@ -3,7 +3,7 @@ import './App.css'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import TimeSheet from './pages/TimeSheet'
-import PrivateRoute from './utils/privateRoute'
+import PrivateRouteTimesheet from './utils/PrivateRouteTimesheet'
 function App() {
   
 
@@ -15,9 +15,9 @@ function App() {
           <Route path="/" element={<Home/>} />
          
               <Route path='/timesheet' element={
-                <PrivateRoute>
-                  <TimeSheet/>
-                </PrivateRoute>
+                <PrivateRouteTimesheet>
+                  <TimeSheet></TimeSheet>
+                </PrivateRouteTimesheet>
                
               } /> 
       
