@@ -5,7 +5,7 @@ const password1 = 123456
 export const login = async (email , password) => {
     //get formdata 
     const Email = email.toLowerCase().trim();
-    //fetch data from endpoints ->todo
+    //fetch data from endpoints -> todo
     //try catch 
     try {
       
