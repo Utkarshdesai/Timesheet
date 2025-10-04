@@ -1,5 +1,9 @@
 # Ticktock Timesheet (React + Vite)
 
+## Credentials
+Email: user@example.com, 
+Password: 123456
+
 Ticktock is a minimal timesheet web app built with React 19 and Vite 7. It demonstrates a simple auth flow using `sessionStorage`, protected routing with React Router v7, data fetching from a hosted backend, toast notifications, and Tailwind CSS v4 styling.
 
 ---
